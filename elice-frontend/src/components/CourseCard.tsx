@@ -38,7 +38,7 @@ export default function CourseCard({ course }: CardProps) {
               <FreePrice>무료</FreePrice>
             ) : (
               <>
-                <Price>`{course.price}원'</Price>
+                <Price>{course.price}원</Price>
               </>
             )}
           </div>
