@@ -18,10 +18,15 @@ export async function GetCourse(
             $and: [
               { title: `%${conditions.title || ''}%` },
               {
-                $or: conditions.isFree.map((value) => ({
-                  enroll_type: 0,
-                  is_free: value === 'free',
-                })),
+                $or: conditions.price.map((value) => {
+                  let isFree
+                  if (value === '0') {
+                    isFree = true
+                  } else {
+                    isFree = false
+                  }
+                  return { enroll_type: 0, is_free: isFree }
+                }),
               },
             ],
           }),
@@ -30,7 +35,6 @@ export async function GetCourse(
         },
       },
     )
-    console.log(res.data)
     return res.data
   } catch (e) {
     alert(e)
