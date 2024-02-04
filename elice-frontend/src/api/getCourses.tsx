@@ -1,13 +1,10 @@
 import axios from 'axios'
 import { FilterCondition } from '../types/filterType'
 
-const OFFSET = 0
-const COUNT = 20
-
 export async function GetCourse(
   conditions: FilterCondition,
-  offset: number = OFFSET,
-  count: number = COUNT,
+  page: number,
+  count: number,
 ) {
   try {
     const res = await axios.get(
@@ -30,7 +27,7 @@ export async function GetCourse(
               },
             ],
           }),
-          offset: offset,
+          offset: page - 1,
           count: count,
         },
       },
