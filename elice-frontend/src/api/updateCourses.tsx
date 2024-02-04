@@ -9,8 +9,8 @@ export const UpdateCourse = (offset: number) => {
   const [searchParams, setSearchParams] = useSearchParams()
   useEffect(() => {
     const title = searchParams.get('keyword')
-    const isFree = searchParams.getAll('price')
-    GetCourse({ title: title, isFree: isFree })
+    const price = searchParams.getAll('price')
+    GetCourse({ title: title, price: price })
       .then((response) => {
         const { courses, course_count } = response
         setCourses(courses)

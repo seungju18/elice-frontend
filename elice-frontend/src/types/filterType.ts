@@ -1,6 +1,6 @@
 export interface FilterCondition {
   title: string | null
-  isFree: string[]
+  price: string[]
 }
 
 export interface CourseType {
