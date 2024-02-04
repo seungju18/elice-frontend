@@ -1,31 +1,35 @@
 import CourseCard from './CourseCard'
 import { UpdateCourse } from '../api/updateCourses'
-import { useState } from 'react'
+import { useContext, useEffect } from 'react'
 import {
   Count,
   CourseCountDiv,
   CourseListDiv,
 } from '../styles/CourseList.style'
+import Pagination from './Pagination'
+import { PageContext } from '../PageContext'
 
 export const CoursesList = () => {
-  const [page, setPage] = useState<number>(0)
-  const { courses, course_count } = UpdateCourse(0)
+  const { page } = useContext(PageContext)
+  const { courses, course_count } = UpdateCourse((page - 1) * 20)
+
   return (
     <>
       <CourseCountDiv>
         <Count>전체 {course_count}개</Count>
       </CourseCountDiv>
       <CourseListDiv>
-        {course_count > 0 ? (
+        {course_count !== 0 ? (
           <>
             {courses?.map((course: any) => {
               return <CourseCard key={course.id} course={course} />
             })}
           </>
         ) : (
-          <div>검색 결과가 없습니다.</div>
+          <span>No Results!</span>
         )}
       </CourseListDiv>
+      <Pagination />
     </>
   )
 }
