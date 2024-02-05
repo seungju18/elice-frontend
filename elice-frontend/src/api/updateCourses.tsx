@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { CourseType } from '../types/filterType'
 import { PageContext } from '../PageContext'
 
-export function UpdateCourse(offset: number) {
+export function UpdateCourse() {
   const [courses, setCourses] = useState<CourseType[]>([])
   const [course_count, setCourse_count] = useState<number>(0)
   const [searchParams, setSearchParams] = useSearchParams()
@@ -25,7 +25,7 @@ export function UpdateCourse(offset: number) {
       }
     }
     fetchData()
-  }, [offset, searchParams])
+  }, [page, searchParams])
   console.log(courses)
   return { courses, course_count }
 }

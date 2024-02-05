@@ -6,6 +6,7 @@ export async function GetCourse(
   page: number,
   count: number,
 ) {
+  console.log(page)
   try {
     const filter_conditions = {
       $and: [
@@ -28,7 +29,7 @@ export async function GetCourse(
       {
         params: {
           filter_conditions: JSON.stringify(filter_conditions),
-          offset: page - 1,
+          offset: (page - 1) * 20,
           count: count,
         },
       },
