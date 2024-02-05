@@ -17,11 +17,31 @@ export default function CourseCard({ course }: CardProps) {
   return (
     <CourseCardDiv>
       <CardImageDiv>
-        <img
-          src={course.logo_file_url}
-          alt="course logo"
-          style={{ width: '100%', height: '145px' }}
-        />
+        {course.image_file_url != null ? (
+          <img
+            src={course.image_file_url}
+            alt="course logo"
+            style={{ width: '100%', height: '145px' }}
+          />
+        ) : course.logo_file_url != null ? (
+          <img
+            src={course.logo_file_url}
+            alt="course image"
+            style={{ width: '100%', height: '145px' }}
+          />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              height: '145px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Image
+          </div>
+        )}
       </CardImageDiv>
       <CardInnerDiv>
         <CardInfoDiv>
