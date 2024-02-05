@@ -1,32 +1,33 @@
 import axios from 'axios'
-import { FilterCondition } from '../types/filterType'
 
 export async function GetCourse(
-  conditions: FilterCondition,
+  title: string | null,
+  price: string[] | null,
   page: number,
   count: number,
 ) {
   try {
+    const filter_conditions = {
+      $and: [
+        { title: `%${title || ''}%` },
+        {
+          $or: [
+            ...(price?.includes('29')
+              ? [{ enroll_type: 0, is_free: true }]
+              : []),
+            ...(price?.includes('30')
+              ? [{ enroll_type: 0, is_free: false }]
+              : []),
+          ],
+        },
+      ],
+    }
+
     const res = await axios.get(
       'https://api-rest.elice.io/org/academy/course/list/',
       {
         params: {
-          filter_conditions: JSON.stringify({
-            $and: [
-              { title: `%${conditions.title || ''}%` },
-              {
-                $or: conditions.price.map((value) => {
-                  let isFree
-                  if (value === '0') {
-                    isFree = true
-                  } else {
-                    isFree = false
-                  }
-                  return { enroll_type: 0, is_free: isFree }
-                }),
-              },
-            ],
-          }),
+          filter_conditions: JSON.stringify(filter_conditions),
           offset: page - 1,
           count: count,
         },
