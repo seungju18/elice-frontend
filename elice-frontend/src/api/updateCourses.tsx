@@ -14,7 +14,6 @@ export function UpdateCourse(offset: number) {
     const fetchData = async () => {
       const title = searchParams.get('keyword')
       const price = searchParams.getAll('price')
-      console.log(price)
 
       try {
         const response = await GetCourse(title, price, page, 20)
@@ -27,5 +26,6 @@ export function UpdateCourse(offset: number) {
     }
     fetchData()
   }, [offset, searchParams])
+  console.log(courses)
   return { courses, course_count }
 }
