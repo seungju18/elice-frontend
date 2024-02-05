@@ -1,6 +1,5 @@
 import CourseCard from './CourseCard'
 import { UpdateCourse } from '../api/updateCourses'
-import { useContext, useEffect } from 'react'
 import {
   Count,
   CourseCountDiv,
@@ -10,9 +9,8 @@ import Pagination from './Pagination'
 import { PageContext } from '../PageContext'
 
 export const CoursesList = () => {
-  const { page } = useContext(PageContext)
-  const { courses, course_count } = UpdateCourse((page - 1) * 20)
-
+  const { courses, course_count } = UpdateCourse()
+  const maxPageNum = course_count / 20
   return (
     <>
       <CourseCountDiv>
@@ -29,7 +27,7 @@ export const CoursesList = () => {
           <span>No Results!</span>
         )}
       </CourseListDiv>
-      <Pagination />
+      <Pagination maxPageNum={maxPageNum} />
     </>
   )
 }
