@@ -9,11 +9,13 @@ import {
   Description,
   FreePrice,
   Price,
+  Label,
 } from '../styles/CourseCard.style'
 interface CardProps {
   course: CourseType
 }
 export default function CourseCard({ course }: CardProps) {
+  const discounted_percentage = Math.round(Number(course.discount_rate) * 100)
   return (
     <CourseCardDiv>
       <CardImageDiv>
@@ -45,6 +47,7 @@ export default function CourseCard({ course }: CardProps) {
       </CardImageDiv>
       <CardInnerDiv>
         <CardInfoDiv>
+          <Label>미분류</Label>
           <Title>{course.title}</Title>
           {course.short_description ? (
             <Description>{course.short_description}</Description>
@@ -58,7 +61,17 @@ export default function CourseCard({ course }: CardProps) {
               <FreePrice>무료</FreePrice>
             ) : (
               <>
-                <Price>{course.price}원</Price>
+                <Price className="discounted_price">
+                  ₩{course.discounted_price}원
+                </Price>
+                {course.is_discounted ? (
+                  <>
+                    <Price className="original">${course.price}원</Price>{' '}
+                    <Price className="discount_rate">
+                      {discounted_percentage}%
+                    </Price>
+                  </>
+                ) : null}
               </>
             )}
           </div>

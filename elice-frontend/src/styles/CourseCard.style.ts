@@ -18,21 +18,28 @@ export const CardInnerDiv = styled.div`
   height: 237px;
 `
 export const CardInfoDiv = styled.div`
-  margin: 0 20px;
+  margin: 5px 20px;
   display: flex;
   height: calc() (237px - 61px);
   flex-direction: column;
   text-align: left;
+  justify-content: center;
 `
 export const CardPriceDiv = styled.div`
   display: flex;
   align-items: center;
-  height: 61px;
+  height: 50px;
   gap: 0.375rem;
   border-top: 1px solid rgb(240, 241, 243);
   padding-top: 1rem;
 `
 
+export const Label = styled.a`
+  font-size: 14px;
+  font-weight: bold;
+  color: #9568a1;
+  margin-top: 2px;
+`
 export const Title = styled.a`
   font-size: 18px;
   font-weight: bold;
@@ -40,6 +47,7 @@ export const Title = styled.a`
   line-height: 1.6;
   overflow: hidden;
   display: -webkit-box;
+  margin: 5px 0;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `
@@ -60,8 +68,20 @@ export const FreePrice = styled.a`
 `
 
 export const Price = styled.a`
-  margin: 0 10px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #222222;
+  &.discounted_price {
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222222;
+  }
+  &.original {
+    margin: 0 5px;
+    color: #7d7e80;
+    text-decoration: line-through;
+  }
+  &.discount_rate {
+    font-weight: bold;
+    margin: 0 5px;
+    color: #fa4c87;
+  }
 `
